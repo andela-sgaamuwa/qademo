@@ -6,7 +6,7 @@ import org.json.JSONException;
 
 public class BaseTest {
 
-    private String token;
+    protected String token;
 
     public void setup(String username, String password) throws JSONException {
         Response response = AuthenticationCalls.loginUser(username, password);

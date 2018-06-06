@@ -6,8 +6,8 @@ public class BucketlistItem {
 
     private int id;
     private String name;
-    private LocalDate dateCreated;
-    private LocalDate dateModified;
+    private LocalDate date_created;
+    private LocalDate date_modified;
     private boolean done;
 
     public int getId() {
@@ -26,20 +26,20 @@ public class BucketlistItem {
         this.name = name;
     }
 
-    public LocalDate getDateCreated() {
-        return dateCreated;
+    public LocalDate getDate_created() {
+        return date_created;
     }
 
-    public void setDateCreated(LocalDate dateCreated) {
-        this.dateCreated = dateCreated;
+    public void setDate_created(LocalDate date_created) {
+        this.date_created = date_created;
     }
 
-    public LocalDate getDateModified() {
-        return dateModified;
+    public LocalDate getDate_modified() {
+        return date_modified;
     }
 
-    public void setDateModified(LocalDate dateModified) {
-        this.dateModified = dateModified;
+    public void setDate_modified(LocalDate date_modified) {
+        this.date_modified = date_modified;
     }
 
     public boolean isDone() {

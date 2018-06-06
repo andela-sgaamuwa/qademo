@@ -6,9 +6,9 @@ import java.util.List;
 public class Bucketlist {
     private int id;
     private String name;
-    private String createdBy;
-    private LocalDate dateCreated;
-    private LocalDate dateModified;
+    private String created_by;
+    private LocalDate date_created;
+    private LocalDate date_modified;
     private List<BucketlistItem> items;
 
     public int getId() {
@@ -27,28 +27,28 @@ public class Bucketlist {
         this.name = name;
     }
 
-    public String getCreatedBy() {
-        return createdBy;
+    public String getCreated_by() {
+        return created_by;
     }
 
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
+    public void setCreated_by(String created_by) {
+        this.created_by = created_by;
     }
 
-    public LocalDate getDateCreated() {
-        return dateCreated;
+    public LocalDate getDate_created() {
+        return date_created;
     }
 
-    public void setDateCreated(LocalDate dateCreated) {
-        this.dateCreated = dateCreated;
+    public void setDate_created(LocalDate date_created) {
+        this.date_created = date_created;
     }
 
-    public LocalDate getDateModified() {
-        return dateModified;
+    public LocalDate getDate_modified() {
+        return date_modified;
     }
 
-    public void setDateModified(LocalDate dateModified) {
-        this.dateModified = dateModified;
+    public void setDate_modified(LocalDate date_modified) {
+        this.date_modified = date_modified;
     }
 
     public List<BucketlistItem> getItems() {
