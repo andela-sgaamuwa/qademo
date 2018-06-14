@@ -3,8 +3,8 @@ package apiTests.bucketlistTests;
 import apiCalls.BucketlistCalls;
 import apiTests.BaseTest;
 import com.jayway.restassured.response.Response;
-import com.jayway.restassured.response.ResponseBody;
 import entities.Bucketlist;
+import entities.BucketlistItem;
 import org.json.JSONException;
 import org.testng.Assert;
 import org.testng.annotations.AfterGroups;
@@ -12,8 +12,14 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeGroups;
 import org.testng.annotations.Test;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class BucketListTest extends BaseTest{
     private int bucketlistId;
+    private Bucketlist bucketlist;
+    private BucketlistItem bucketlistItem;
 
     @BeforeClass
     private void setup() throws JSONException {
@@ -50,8 +56,6 @@ public class BucketListTest extends BaseTest{
     public void createBucketlistItem() throws JSONException{
         Response response = BucketlistCalls.createBucketListItem("item1", bucketlistId, token);
         Assert.assertEquals(response.getStatusCode(), 201);
-        Assert.assertEquals(response.jsonPath().get("name"), "item1");
-        Assert.assertEquals(response.jsonPath().get("done"), false);
         BucketlistCalls.deleteBucketlistItem(bucketlistId, (Integer) response.jsonPath().get("id"), token);
 
     }
@@ -74,6 +78,42 @@ public class BucketListTest extends BaseTest{
 
     @AfterGroups(value = "bucketlistItemTests", alwaysRun = true)
     public void cleanUpBucketlist() throws JSONException{
+        BucketlistCalls.deleteBucketlist(bucketlistId, token);
+    }
+
+    @BeforeGroups(value = "nonfunctionalTests", dependsOnGroups = "bucketlistItemTests", alwaysRun = true)
+    public void setUpNonFunctionalTests() throws JSONException{
+        Response response = BucketlistCalls.createBucketlist("new", token);
+        bucketlist = response.as(Bucketlist.class);
+        response = BucketlistCalls.createBucketListItem("item1", bucketlist.getId(), token);
+        bucketlistItem = response.as(BucketlistItem.class);
+    }
+
+    @Test(groups = "nonfunctionalTests")
+    public void checkItemIsCreatedWithDoneAsFalse(){
+        Assert.assertFalse(bucketlistItem.isDone());
+    }
+
+    @Test(groups = "nonfunctionalTests")
+    public void checkBucketlistCreatedWithNoItems(){
+        Assert.assertTrue(bucketlist.getItems().isEmpty());
+    }
+
+    @Test(groups = "nonfunctionalTests")
+    public void checkTheDateFormatReturnedForTheItemAndBucketlist(){
+        try{
+            new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss").parse(bucketlist.getDate_created());
+            new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss").parse(bucketlist.getDate_modified());
+            new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss").parse(bucketlistItem.getDate_created());
+            new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss").parse(bucketlistItem.getDate_modified());
+            assert true;
+        }catch (ParseException e){
+            assert false;
+        }
+    }
+
+    @AfterGroups(value = "nonfunctionalTests", alwaysRun = true)
+    public void cleanUpNonFunctionalTests() throws JSONException{
         BucketlistCalls.deleteBucketlist(bucketlistId, token);
     }
 }

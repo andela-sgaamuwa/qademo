@@ -2,7 +2,6 @@ package apiTests.authTests;
 
 import apiCalls.AuthenticationCalls;
 import apiTests.BaseTest;
-import com.jayway.restassured.path.json.JsonPath;
 import com.jayway.restassured.response.Response;
 import org.json.JSONException;
 import org.testng.Assert;
