@@ -1,13 +1,11 @@
 package entities;
 
-import java.time.LocalDate;
-
 public class BucketlistItem {
 
     private int id;
     private String name;
-    private LocalDate date_created;
-    private LocalDate date_modified;
+    private String date_created;
+    private String date_modified;
     private boolean done;
 
     public int getId() {
@@ -26,19 +24,19 @@ public class BucketlistItem {
         this.name = name;
     }
 
-    public LocalDate getDate_created() {
+    public String getDate_created() {
         return date_created;
     }
 
-    public void setDate_created(LocalDate date_created) {
+    public void setDate_created(String date_created) {
         this.date_created = date_created;
     }
 
-    public LocalDate getDate_modified() {
+    public String getDate_modified() {
         return date_modified;
     }
 
-    public void setDate_modified(LocalDate date_modified) {
+    public void setDate_modified(String date_modified) {
         this.date_modified = date_modified;
     }
 
